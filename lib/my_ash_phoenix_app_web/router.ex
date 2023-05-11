@@ -22,6 +22,21 @@ defmodule MyAshPhoenixAppWeb.Router do
     live "/posts", ExampleLiveView
   end
 
+  pipeline :graphql do
+    plug AshGraphql.Plug
+  end
+
+  scope "/" do
+    pipe_through [:graphql]
+
+    forward "/gql", Absinthe.Plug, schema: MyAshPhoenixApp.Schema
+
+    forward "/playground",
+            Absinthe.Plug.GraphiQL,
+            schema: MyAshPhoenixApp.Schema,
+            interface: :playground
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", MyAshPhoenixAppWeb do
   #   pipe_through :api

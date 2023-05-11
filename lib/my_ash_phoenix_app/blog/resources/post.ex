@@ -2,7 +2,10 @@ defmodule MyAshPhoenixApp.Blog.Post do
   # Using Ash.Resource turns this module into an Ash resource.
   use Ash.Resource,
     # Tells Ash you want this resource to store its data in Postgres.
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [
+      AshGraphql.Resource
+    ]
 
   # The Postgres keyword is specific to the AshPostgres module.
   postgres do
@@ -52,5 +55,18 @@ defmodule MyAshPhoenixApp.Blog.Post do
     # Add a string type attribute called `:content`
     # If allow_nil? is not specified, then content can be nil
     attribute :content, :string
+  end
+
+  graphql do
+    type :post
+
+    queries do
+      get :get_by_id, :by_id
+      list :read_all, :read
+    end
+
+    mutations do
+      create :create_post, :create
+    end
   end
 end
