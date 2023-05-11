@@ -4,7 +4,8 @@ defmodule MyAshPhoenixApp.Blog.Post do
     # Tells Ash you want this resource to store its data in Postgres.
     data_layer: AshPostgres.DataLayer,
     extensions: [
-      AshGraphql.Resource
+      AshGraphql.Resource,
+      AshJsonApi.Resource
     ]
 
   # The Postgres keyword is specific to the AshPostgres module.
@@ -67,6 +68,19 @@ defmodule MyAshPhoenixApp.Blog.Post do
 
     mutations do
       create :create_post, :create
+    end
+  end
+
+  json_api do
+    # The JSON API type for this resource
+    type "post"
+
+    routes do
+      base "/posts"
+
+      get :read
+      index :read
+      post :create
     end
   end
 end

@@ -56,6 +56,7 @@ defmodule MyAshPhoenixApp.MixProject do
       {:ash_phoenix, "~> 1.2"},
       {:ash_graphql, "~> 0.24.1"},
       {:absinthe_plug, "~> 1.5"},
+      {:ash_json_api, "~> 0.31.3"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end

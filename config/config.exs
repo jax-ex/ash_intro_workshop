@@ -66,6 +66,10 @@ config :my_ash_phoenix_app,
 
 config :ash_graphql, :default_managed_relationship_type_name_template, :action_name
 
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json"]
+}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

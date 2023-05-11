@@ -38,9 +38,11 @@ defmodule MyAshPhoenixAppWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", MyAshPhoenixAppWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    forward "/blog", MyAshPhoenixApp.Blog.Router
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:my_ash_phoenix_app, :dev_routes) do

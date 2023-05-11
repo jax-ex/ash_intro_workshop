@@ -1,7 +1,8 @@
 defmodule MyAshPhoenixApp.Blog do
   use Ash.Api,
     extensions: [
-      AshGraphql.Api
+      AshGraphql.Api,
+      AshJsonApi.Api
     ]
 
   resources do
